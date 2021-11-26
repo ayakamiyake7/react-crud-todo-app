@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [todos, setTodos] = useState([]);
+    const [todo, setTodo] = useState('');
+    
+    // function to get the value of the input and set the new state
+    function handleInputChange(e) {
+        // set the new state value to what's currently in the input box
+        setTodo(e.target.value);
+    }
+
+    // function to create a new object on form submit
+    function handleFormSubmit(e) {
+        // prevent the browser default behavior or refreshing the page on submit
+        ////////////////////////
+
+        // don't submit if the input is an empty string
+        if (todo !== '') {
+            // set the new todos state (the array)
+            setTodos([
+                // copy the current values in state
+                ...todos,
+                {
+                    // setting a basic id to identify the object
+                    
+                }
+            ])
+        }
+    }
+
+
+    return (
+        <div className="App">
+            <h1>Add Todo</h1>
+            <form>
+                <input
+                name="todo"
+                type="text"
+                placeholder="Create a new todo"
+                />
+            </form>
+
+            <ul className="todo-list">
+                {todos.map((todo)=> {
+                    <li>{todo}</li>
+                })}
+            </ul>
+        </div>
+    )
 }
 
-export default App;
+export default App
